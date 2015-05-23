@@ -18,7 +18,7 @@ class Coaster {
 
             }
 
-            $lists = array_merge($placeholder, $lists);
+            $lists = $placeholder + $lists;
 
         }
 
