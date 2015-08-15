@@ -9,7 +9,7 @@ class CoasterServiceProvider extends ServiceProvider {
 	 *
 	 * @var bool
 	 */
-	protected $defer = false;
+	protected $defer = true;
 
 	/**
 	 * Bootstrap the application events.
@@ -18,7 +18,7 @@ class CoasterServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('sukohi/coaster');
+		//
 	}
 
 	/**
@@ -41,7 +41,7 @@ class CoasterServiceProvider extends ServiceProvider {
 	 */
 	public function provides()
 	{
-		return array('coaster');
+		return ['coaster'];
 	}
 
 }

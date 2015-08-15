@@ -1,6 +1,6 @@
 # Coaster
 A PHP package mainly developed for Laravel to make array for Form::select() with/without a placeholder.  
-(This is for Laravel 4.2. [For Laravel 5+](https://github.com/SUKOHI/Coaster))
+(This is for Laravel 5+. [For Laravel 4.2](https://github.com/SUKOHI/Coaster/tree/1.0))
 
 Installation
 ====
@@ -8,7 +8,7 @@ Installation
 Add this package name in composer.json
 
     "require": {
-      "sukohi/coaster": "1.*"
+      "sukohi/coaster": "2.*"
     }
 
 Execute composer command.
@@ -19,14 +19,14 @@ Register the service provider in app.php
 
     'providers' => [
         ...Others...,  
-        'Sukohi\Coaster\CoasterServiceProvider',
+        Sukohi\Coaster\CoasterServiceProvider::class,
     ]
 
 Also alias
 
     'aliases' => [
         ...Others...,  
-        'Coaster' => 'Sukohi\Coaster\Facades\Coaster',
+        'Coaster'   => Sukohi\Coaster\Facades\Coaster::class
     ]
     
 Usage
@@ -34,7 +34,7 @@ Usage
 
 **Minimal Way**
 
-    $lists = Coaster::get([
+    $lists = \Coaster::get([
         '1' => 'Text - 1',
         '2' => 'Text - 2',
         '3' => 'Text - 3',
@@ -55,7 +55,7 @@ Usage
 
 **with Displaying Flag (If $placeholder_flag is false, the placeholder will not be displayed)**
 
-    $lists = Coaster::get([
+    $lists = \Coaster::get([
         '1' => 'Text - 1',
         '2' => 'Text - 2',
         '3' => 'Text - 3',
@@ -76,9 +76,9 @@ Usage
 
 **Using Closure**
 
-    $lists = Coaster::get(function(){
+    $lists = \Coaster::get(function(){
 
-        return \User::where('id', '<', 5)->lists('name', 'id');    // You need to return array values.
+        return \App\User::where('id', '<', 5)->lists('name', 'id')->all();    // You need to return array values.
 
     }, 'Please choose');
     echo Form::select('test3', $lists);
@@ -98,7 +98,7 @@ Usage
 
 **with Default Value**
 
-    $lists = Coaster::get([
+    $lists = \Coaster::get([
         '1' => 'Text - 1',
         '2' => 'Text - 2',
         '3' => 'Text - 3',
