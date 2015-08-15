@@ -1,110 +1,120 @@
 # Coaster
-A PHP package mainly developed for Laravel to make array for Form::select() with/without a placeholder.
+A PHP package mainly developed for Laravel to make array for Form::select() with/without a placeholder.  
+(This is for Laravel 4.2. [For Laravel 5+](https://github.com/SUKOHI/Coaster))
 
-Installation&settings for Laravel
+Installation
 ====
 
-After installation using composer, add the followings to the array in  app/config/app.php
+Add this package name in composer.json
 
-    'providers' => array(  
+    "require": {
+      "sukohi/coaster": "1.*"
+    }
+
+Execute composer command.
+
+    composer update
+
+Register the service provider in app.php
+
+    'providers' => [
         ...Others...,  
         'Sukohi\Coaster\CoasterServiceProvider',
-    )
+    ]
 
-Also
+Also alias
 
-    'aliases' => array(  
+    'aliases' => [
         ...Others...,  
         'Coaster' => 'Sukohi\Coaster\Facades\Coaster',
-    )
+    ]
     
 Usage
 ====
 
-
 **Minimal Way**
 
-        $lists = Coaster::get([
-            '1' => 'Text - 1',
-            '2' => 'Text - 2',
-            '3' => 'Text - 3',
-        ], 'Please choose');
-        echo Form::select('test1', $lists);
+    $lists = Coaster::get([
+        '1' => 'Text - 1',
+        '2' => 'Text - 2',
+        '3' => 'Text - 3',
+    ], 'Please choose');
+    echo Form::select('test1', $lists);
 
-        /* Output
+    /* Output
 
-            <select name="test">
-                <option value="" selected="selected">Please choose</option>
-                <option value="0">Text - 1</option>
-                <option value="1">Text - 2</option>
-                <option value="2">Text - 3</option>
-            </select>
-
-        */
-
-
-**with Displaying Flag (If $placeholder_flag is false, the placeholder will not be displayed)**
-
-        $lists = Coaster::get([
-            '1' => 'Text - 1',
-            '2' => 'Text - 2',
-            '3' => 'Text - 3',
-        ], 'Please choose', $placeholder_flag = true);
-        echo Form::select('test2', $lists);
-
-        /* Output
-
-            <select name="test">
-                <option value="" selected="selected">Please choose</option>
-                <option value="0">Text - 1</option>
-                <option value="1">Text - 2</option>
-                <option value="2">Text - 3</option>
-            </select>
-
-        */
-
-
-**Using Closure**
-
-        $lists = Coaster::get(function(){
-
-            return \User::where('id', '<', 5)->lists('name', 'id');    // You need to return array values.
-
-        }, 'Please choose');
-        echo Form::select('test3', $lists);
-
-        /* Output
-
-            <select name="test2">
-                <option value="" selected="selected">Please choose</option>
-                <option value="0">title - 0</option>
-                <option value="1">title - 1</option>
-                <option value="2">title - 2</option>
-                <option value="3">title - 3</option>
-            </select>
-
-        */
-
-
-**with Default Value**
-
-        $lists = Coaster::get([
-            '1' => 'Text - 1',
-            '2' => 'Text - 2',
-            '3' => 'Text - 3',
-        ], ['default' => 'Please choose'], true);
-        echo Form::select('test4', $lists);
-
-        /* Output
-
-        <select name="test">
-            <option value="default">Please choose</option>
+        <select name="test1">
+            <option value="" selected="selected">Please choose</option>
             <option value="0">Text - 1</option>
             <option value="1">Text - 2</option>
             <option value="2">Text - 3</option>
         </select>
 
-        */
+    */
+
+
+**with Displaying Flag (If $placeholder_flag is false, the placeholder will not be displayed)**
+
+    $lists = Coaster::get([
+        '1' => 'Text - 1',
+        '2' => 'Text - 2',
+        '3' => 'Text - 3',
+    ], 'Please choose', $placeholder_flag = true);
+    echo Form::select('test2', $lists);
+
+    /* Output
+
+        <select name="test2">
+            <option value="" selected="selected">Please choose</option>
+            <option value="0">Text - 1</option>
+            <option value="1">Text - 2</option>
+            <option value="2">Text - 3</option>
+        </select>
+
+    */
+
+
+**Using Closure**
+
+    $lists = Coaster::get(function(){
+
+        return \User::where('id', '<', 5)->lists('name', 'id');    // You need to return array values.
+
+    }, 'Please choose');
+    echo Form::select('test3', $lists);
+
+    /* Output
+
+        <select name="test3">
+            <option value="" selected="selected">Please choose</option>
+            <option value="0">title - 0</option>
+            <option value="1">title - 1</option>
+            <option value="2">title - 2</option>
+            <option value="3">title - 3</option>
+        </select>
+
+    */
+
+
+**with Default Value**
+
+    $lists = Coaster::get([
+        '1' => 'Text - 1',
+        '2' => 'Text - 2',
+        '3' => 'Text - 3',
+    ], ['default' => 'Please choose'], true);
+    echo Form::select('test4', $lists);
+
+    /* Output
+
+    <select name="test4">
+        <option value="default">Please choose</option>
+        <option value="0">Text - 1</option>
+        <option value="1">Text - 2</option>
+        <option value="2">Text - 3</option>
+    </select>
+
+    */
         
 License
 ====
