@@ -1,6 +1,6 @@
 {
     "name": "sukohi/coaster",
-    "description": "",
+    "description": "A PHP package mainly developed for Laravel to make array for Form::select() with/without a placeholder. ",
     "authors": [
         {
             "name": "Sukohi",
